@@ -2,11 +2,14 @@ extends KinematicBody
 
 const MOUSE_SENSITIVITY = 0.04;
 const GRAVITY = 20; # downward acceleration in m/s^2
+const EXTRA_GRAVITY = 1.1; # extra gravity when player is falling
+const JUMP_IMPULSE = 20;
 export var speed = 10; # movement speed in m/s
-export var jump_impulse = 30;
+var air_time = 0.0; # time spent in air
 var velocity = Vector3.ZERO
 
 onready var head = $Head;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
@@ -26,9 +29,15 @@ func _physics_process(delta):
 	# player's movement (unit) vector
 	var direction = Vector3.ZERO
 
+	# air time update
+	if is_on_floor():
+		air_time = 0.0
+	else:
+		air_time += delta
+	
 	# jump
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y += jump_impulse
+		velocity.y += JUMP_IMPULSE
 
 	# moving in a single direction
 	if Input.is_action_pressed("move_forward"):
@@ -47,9 +56,10 @@ func _physics_process(delta):
 		direction = direction.normalized()
 
 	# acceleration
+	# Gravity is increased when descending, based on air time.
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
-	velocity.y -= GRAVITY * delta
+	velocity.y -= (GRAVITY + GRAVITY * air_time * EXTRA_GRAVITY) * delta
 	
 	# move_and_slide() actually moves the player. Smooths out collisions
 	velocity = move_and_slide(velocity, Vector3.UP)
