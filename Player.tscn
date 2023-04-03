@@ -29,3 +29,6 @@ shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85039, -0.453385 )
+
+[node name="RayCast" type="RayCast" parent="Head/Camera"]
+cast_to = Vector3( 0, 0, -3 )
