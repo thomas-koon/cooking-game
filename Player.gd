@@ -7,6 +7,7 @@ export var speed = 10; # movement speed in m/s
 var velocity = Vector3.ZERO
 
 onready var head = $Head;
+onready var raycast = $Head/Camera/RayCast;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,3 +57,13 @@ func _physics_process(delta):
 	# move_and_slide() actually moves the player. Smooths out collisions
 	velocity = move_and_slide(velocity, Vector3.UP)
 
+func _process(_delta):
+	if Input.is_action_just_pressed("pickup"):
+		if raycast.is_colliding():
+			var obj = raycast.get_collider();
+			if(obj.is_class("RigidBody")):
+				print(obj.name);
+			else:
+				print("fum");
+		
+		
