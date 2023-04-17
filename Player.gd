@@ -5,6 +5,7 @@ const GRAVITY = 40; # downward acceleration in m/s^2
 const JUMP_IMPULSE = 20;
 export var speed = 10; # movement speed in m/s
 var velocity = Vector3.ZERO
+var holding;
 
 onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast;
@@ -58,12 +59,20 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 func _process(_delta):
+	if(holding != null):
+		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
+	else:
+		pass;
 	if Input.is_action_just_pressed("pickup"):
-		if raycast.is_colliding():
-			var obj = raycast.get_collider();
-			if(obj.is_class("RigidBody")):
-				print(obj.name);
-			else:
-				print("fum");
+		if(holding == null):
+			if raycast.is_colliding():
+				var obj = raycast.get_collider();
+				if(obj.is_class("RigidBody")):
+					holding = obj;
+		else: # drop it
+			holding = null;
+			
+					
+					
 		
 		

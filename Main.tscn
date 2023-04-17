@@ -30,6 +30,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.29473, 7.44509 )
 visible = false
 
 [node name="Stove" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.3149, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.768343, 11.0631, 2.44617 )
 axis_lock_angular_x = false
 axis_lock_angular_z = false
