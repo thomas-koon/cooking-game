@@ -59,8 +59,16 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 func _process(_delta):
+	#holding 
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
+		if(Input.is_action_just_pressed("throw")):
+			var obj = holding;
+			holding = null;
+			obj.apply_central_impulse(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO))*50)
+			print("throw");
+		
+			
 	else:
 		pass;
 	if Input.is_action_just_pressed("pickup"):
