@@ -21,10 +21,6 @@ func _input(event):
 		head.rotate_x(deg2rad(-event.relative.y * MOUSE_SENSITIVITY))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-80), deg2rad(80))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _physics_process(delta):
 	# player's movement (unit) vector
 	var direction = Vector3.ZERO
@@ -68,7 +64,6 @@ func _process(_delta):
 			obj.apply_central_impulse(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO))*50)
 			print("throw");
 		
-			
 	else:
 		pass;
 	if Input.is_action_just_pressed("pickup"):

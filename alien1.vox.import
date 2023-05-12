@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/alien1.vox-bffe2f64c2b85a476769cdafee9d26ea.mesh"
+
+[deps]
+
+source_file="res://alien1.vox"
+dest_files=[ "res://.import/alien1.vox-bffe2f64c2b85a476769cdafee9d26ea.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
