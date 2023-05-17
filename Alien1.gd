@@ -11,7 +11,9 @@ func _ready():
 
 func _physics_process(delta):
 	velocity.y -= delta * GRAVITY;
-	velocity = move_and_slide(velocity, Vector3.UP)
+	if Input.is_action_just_pressed("test"):
+		_jump()
+	move_and_slide(velocity, Vector3.UP)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -21,5 +23,15 @@ func _process(delta):
 		look_at(global_transform.origin - player_direction, Vector3.UP);
 		rotation.x = 0;
 		rotation.z = 0;
+		
+func _jump():
+	# clean up this code
+	var player_direction = player.transform.origin - transform.origin;
+	player_direction.y = 0.0
+	var distance = player_direction.length()
+	var jumpHeight = distance;
+	var verticalVelocity = sqrt(2.0 * GRAVITY * jumpHeight)
+	var horizontalVelocity = player_direction.normalized() * distance * 0.25# Adjust the speed as needed
+	velocity = horizontalVelocity + Vector3(0, verticalVelocity, 0)
 	
 
