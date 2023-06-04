@@ -1,44 +1,66 @@
 extends KinematicBody
 
 const GRAVITY = 40;
+var ROTATION_SPEED = 8;
 var velocity = Vector3.ZERO;
 
+enum States {IDLE, LOOKING, IN_AIR, ATTACKING}
+var _state : int = States.IDLE
+
 onready var player = get_tree().get_nodes_in_group("player")[0];
-onready var jumpTimer: Timer = $JumpTimer
+onready var stateTimer: Timer = $StateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	jumpTimer.start()
+	stateTimer.start()
 	pass # Replace with function body.
 
 func _physics_process(delta):
+	var position = player.global_transform.origin
+	var direction = (position - global_transform.origin).normalized()
+	# USE STATES
+	if _state == States.IDLE:
+		# NO FRICTION. NO SLIDING
+		pass
+	if _state == States.LOOKING:
+		# NO FRICTION. NO SLIDING
+		look(delta, position, direction) 
+	if _state == States.ATTACKING:
+		# jump or dash
+		pass
+	
 	velocity.y -= delta * GRAVITY;
-	if Input.is_action_just_pressed("test"):
-		_jump()
 	move_and_slide(velocity, Vector3.UP)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var player_direction = player.transform.origin - transform.origin;
-	# look at player when grounded
-	if is_on_floor():
-		look_at(global_transform.origin - player_direction, Vector3.UP);
-		rotation.x = 0;
-		rotation.z = 0;
-		
-func _jump():
+	pass
+	
+func look(delta, position, direction):
+	var targetRotation = direction.angle_to(Vector3(0, 0, -1))
+	var currentRotation = global_transform.basis.get_euler().y
+	rotation.y = lerp_angle(rotation.y, atan2(direction.x, direction.z), delta*ROTATION_SPEED)
+	
+func jump(direction, distance):
 	# clean up this code
-	var player_direction = player.transform.origin - transform.origin;
-	player_direction.y = 0.0
-	var distance = player_direction.length()
 	var jumpHeight = distance;
 	var verticalVelocity = sqrt(2.0 * GRAVITY * jumpHeight)
-	var horizontalVelocity = player_direction.normalized() * distance * 0.25# Adjust the speed as needed
+	var horizontalVelocity = direction.normalized() * distance * 0.25# Adjust the speed as needed
 	velocity = horizontalVelocity + Vector3(0, verticalVelocity, 0)
 
-func _on_JumpTimer_timeout():
-	# do some checks first
-	if is_on_floor():
-		_jump()
-		jumpTimer.wait_time = rand_range(1.0, 3.0)
-		jumpTimer.start()
+func _on_StateTimer_timeout():
+	print(_state)
+	# idle, look, attack (dash or jump), repeat
+	var direction = player.transform.origin - transform.origin;
+	var distance = global_transform.origin.distance_to(player.global_transform.origin)
+	# only change states while grounded
+	if !is_on_floor():
+		_state = _state
+	else:
+		if _state == States.IDLE:
+			_state = States.LOOKING
+		elif _state == States.LOOKING:
+			_state = States.ATTACKING
+		elif _state == States.ATTACKING: # done attacking
+			_state = States.IDLE
+	pass # Replace with function body.
