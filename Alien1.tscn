@@ -21,4 +21,7 @@ shape = SubResource( 1 )
 [node name="StateTimer" type="Timer" parent="."]
 script = ExtResource( 3 )
 
+[node name="DashTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

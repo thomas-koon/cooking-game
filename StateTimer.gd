@@ -1,7 +1,7 @@
 extends Timer
 
-var MIN = 0.5  
-var MAX = 1.5 
+var MIN = 0.3  
+var MAX = 1.0 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
