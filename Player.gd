@@ -3,8 +3,10 @@ extends KinematicBody
 const MOUSE_SENSITIVITY = 0.04;
 const GRAVITY = 40; # downward acceleration in m/s^2
 const JUMP_IMPULSE = 20;
-export var speed = 10; # movement speed in m/s
+const KB_INTERPOLATION_SPEED = 3;
+const SPEED = 10; # movement speed in m/s
 var velocity = Vector3.ZERO
+var kb = Vector3.ZERO
 var holding;
 
 onready var head = $Head;
@@ -24,7 +26,6 @@ func _input(event):
 func _physics_process(delta):
 	# player's movement (unit) vector
 	var direction = Vector3.ZERO
-	
 	# jump
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y += JUMP_IMPULSE
@@ -47,12 +48,14 @@ func _physics_process(delta):
 
 	# acceleration
 	# Gravity is increased when descending, based on air time.
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
+	velocity.x = direction.x * SPEED
+	velocity.z = direction.z * SPEED
 	velocity.y -= delta * GRAVITY;
-	
+	velocity.x += kb.x
+	velocity.z += kb.z
 	# move_and_slide() actually moves the player. Smooths out collisions
 	velocity = move_and_slide(velocity, Vector3.UP)
+	kb = kb.linear_interpolate(Vector3.ZERO, KB_INTERPOLATION_SPEED * delta)
 
 func _process(_delta):
 	#holding 
@@ -63,7 +66,6 @@ func _process(_delta):
 			holding = null;
 			obj.apply_central_impulse(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO))*50)
 			print("throw");
-		
 	else:
 		pass;
 	if Input.is_action_just_pressed("pickup"):
@@ -74,8 +76,7 @@ func _process(_delta):
 					holding = obj;
 		else: # drop it
 			holding = null;
-			
-					
-					
-		
-		
+
+func knockback(kb_dir, magnitude):
+	kb += kb_dir * magnitude
+	
