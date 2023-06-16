@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="Cooking-game"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/fullscreen=true
+
 [editor]
 
 version_control_autoload_on_startup=true
@@ -95,7 +99,7 @@ test={
 
 3d_physics/layer_1="world"
 3d_physics/layer_2="player"
-3d_physics/layer_3="enemies"
+3d_physics/layer_3="mob"
 
 [physics]
 

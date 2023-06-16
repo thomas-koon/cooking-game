@@ -2,8 +2,8 @@ extends KinematicBody
 
 const GRAVITY = 40;
 const ROTATION_SPEED = 8;
-const DASH_SPEED = 10;
-const KB_INTERPOLATION_SPEED = 0.5;
+const DASH_SPEED = 4;
+const KB_INTERPOLATION_SPEED = 3;
 var velocity = Vector3.ZERO;
 var kb = Vector3.ZERO
 var dashing = false; # even if in DASHING state, this has to be true to dash
@@ -22,7 +22,6 @@ onready var stateTimer: Timer = $StateTimer
 func _ready():
 	stateTimer.start()
 	connect("dash_hit", player, "knockback")
-	pass # Replace with function body.
 
 func _physics_process(delta):
 	var position = player.global_transform.origin
@@ -35,12 +34,19 @@ func _physics_process(delta):
 		pass
 	if _state == States.LOOKING:
 		# NO FRICTION. NO SLIDING
+		velocity.x = 0
+		velocity.z = 0
 		look(delta, position, direction) 
 	if _state == States.DASHING:
 		if is_on_floor() and dashing:
 			dash(dash_direction)
+			pass
 	if _state == States.JUMPING:
 		if is_on_floor() and !justJumped:
+			velocity.x = 0
+			velocity.z = 0
+			kb.x = 0
+			kb.z = 0
 			jump(direction, distance)
 			justJumped = true
 		elif is_on_floor() and justJumped:
@@ -49,14 +55,16 @@ func _physics_process(delta):
 		else:
 			pass
 	velocity.y -= delta * GRAVITY;
-	move_and_slide(velocity, Vector3.UP)
+	#apply knockback
+	velocity.x += kb.x
+	velocity.z += kb.z
+	move_and_slide(velocity, Vector3.UP, false, 4, 0.785398, false)
 	kb = kb.linear_interpolate(Vector3.ZERO, KB_INTERPOLATION_SPEED * delta)
 	for index in range(get_slide_count()):
 		var collision = get_slide_collision(index)
 		if (collision.get_collider() == null):
 		   continue
 		if collision.get_collider().is_in_group("player"):
-			var _player = collision.get_collider()
 			# if squashing the player
 			if Vector3.UP.dot(collision.get_normal()) > 0.1:
 				# insta death?
@@ -90,9 +98,12 @@ func dash(direction):
 	var motion = direction * DASH_SPEED
 	velocity.x = motion.x
 	velocity.z = motion.z
+	
+func knockback(kb_dir, magnitude):
+	kb += kb_dir * magnitude
 
 func _on_StateTimer_timeout():
-	print(_state)
+	#print(_state)
 	# idle, look, attack (dash or jump), repeat
 	var direction = player.transform.origin - transform.origin;
 	var distance = global_transform.origin.distance_to(player.global_transform.origin)

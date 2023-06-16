@@ -4,18 +4,20 @@ const MOUSE_SENSITIVITY = 0.04;
 const GRAVITY = 40; # downward acceleration in m/s^2
 const JUMP_IMPULSE = 20;
 const KB_INTERPOLATION_SPEED = 3;
-const SPEED = 10; # movement speed in m/s
+const SPEED = 40; # movement speed in m/s
+const THROW_STRENGTH = 2
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
 var holding;
 
 onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast;
+onready var camera = $Head/Camera;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
-	
+
 func _input(event):
 	#get mouse input for camera rotation
 	if event is InputEventMouseMotion:
@@ -64,7 +66,7 @@ func _process(_delta):
 		if(Input.is_action_just_pressed("throw")):
 			var obj = holding;
 			holding = null;
-			obj.apply_central_impulse(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO))*50)
+			obj.throw(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), THROW_STRENGTH)
 			print("throw");
 	else:
 		pass;
@@ -72,7 +74,8 @@ func _process(_delta):
 		if(holding == null):
 			if raycast.is_colliding():
 				var obj = raycast.get_collider();
-				if(obj.is_class("RigidBody")):
+				if(obj.has_method("throw")):
+					print("get")
 					holding = obj;
 		else: # drop it
 			holding = null;
