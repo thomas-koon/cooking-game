@@ -38,8 +38,7 @@ func hit(projectile, collision):
 				mob.knockback(throw_vec, kb_strength)
 		projectile.velocity.x = 0; projectile.velocity.y = 0; projectile.velocity.z = 0;
 		throw_vec.x = 0; throw_vec.y = 0; throw_vec.z = 0;
-		# part of a recipe
+		# part of a recipe?
 		if collision.get_collider().is_in_group("recipe"):
 			if collision.ingredient_name == projectile.matching_ingredient:
-				#what do??
-				pass
+				collision.recipe(projectile) # each recipe component will have its own recipe() function
