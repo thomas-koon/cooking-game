@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/cooked_pizza.vox-80d530b9b104ae2bb1a2a822b2dbd266.mesh"
+
+[deps]
+
+source_file="res://cooked_pizza.vox"
+dest_files=[ "res://.import/cooked_pizza.vox-80d530b9b104ae2bb1a2a822b2dbd266.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

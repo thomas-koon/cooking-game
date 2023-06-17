@@ -48,7 +48,7 @@ func _physics_process(delta):
 			kb.x = 0
 			kb.z = 0
 			jump(direction, distance)
-			justJumped = true
+			justJumped = true 
 		elif is_on_floor() and justJumped:
 			velocity.x = 0
 			velocity.z = 0

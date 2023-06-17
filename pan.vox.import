@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/pan.vox-e612955aa01aeab0cd6218f408928214.mesh"
+
+[deps]
+
+source_file="res://pan.vox"
+dest_files=[ "res://.import/pan.vox-e612955aa01aeab0cd6218f408928214.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

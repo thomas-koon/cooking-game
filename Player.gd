@@ -66,7 +66,7 @@ func _process(_delta):
 		if(Input.is_action_just_pressed("throw")):
 			var obj = holding;
 			holding = null;
-			obj.throw(((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), THROW_STRENGTH)
+			obj.projectile_component.throw(obj, ((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), THROW_STRENGTH)
 			print("throw");
 	else:
 		pass;
@@ -74,8 +74,7 @@ func _process(_delta):
 		if(holding == null):
 			if raycast.is_colliding():
 				var obj = raycast.get_collider();
-				if(obj.has_method("throw")):
-					print("get")
+				if(obj.has_method("is_projectile")):
 					holding = obj;
 		else: # drop it
 			holding = null;
