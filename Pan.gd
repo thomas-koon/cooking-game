@@ -18,11 +18,6 @@ func _ready():
 	
 func is_projectile():
 	return true
-	
-func recipe(stove):
-	if stove.has_pan:
-		stove.add_pan()
-		queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

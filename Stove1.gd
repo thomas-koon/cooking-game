@@ -30,6 +30,12 @@ func remove_pan():
 	get_node("MeshInstance").mesh = load("res://assets/vox/stove.vox")
 	# spawn a new pan
 	
+func recipe(pan):
+	print("add_pan")
+	if !has_pan:
+		add_pan()
+		pan.queue_free()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	#apply throwing 

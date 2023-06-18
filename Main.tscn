@@ -42,4 +42,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.7566, 7.60777, -6.85331 )
 transform = Transform( 2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, 5.57149, 0 )
 
 [node name="KinematicBody3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.748635, 14.044, -8.11123 )
+transform = Transform( 2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 10.2675, 9.74272, 0 )

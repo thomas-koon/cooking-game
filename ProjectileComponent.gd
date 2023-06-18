@@ -39,6 +39,8 @@ func hit(projectile, collision):
 		projectile.velocity.x = 0; projectile.velocity.y = 0; projectile.velocity.z = 0;
 		throw_vec.x = 0; throw_vec.y = 0; throw_vec.z = 0;
 		# part of a recipe?
-		if collision.get_collider().is_in_group("recipe"):
-			if collision.ingredient_name == projectile.matching_ingredient:
-				collision.recipe(projectile) # each recipe component will have its own recipe() function
+		if collision.get_collider().is_in_group("projectile"):
+			var item = collision.get_collider()
+			if item.ingredient_name == projectile.matching_ingredient:
+				# collided.recipe(thrown)
+				item.recipe(projectile) # each recipe component will have its own recipe() function
