@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/cheese.vox-6080b87f8f672294c11cea457ebf9a02.mesh"
+
+[deps]
+
+source_file="res://assets/vox/cheese.vox"
+dest_files=[ "res://.import/cheese.vox-6080b87f8f672294c11cea457ebf9a02.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

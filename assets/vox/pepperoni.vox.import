@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/pepperoni.vox-a73cc856c64f1f5bb0f0d966c9158933.mesh"
+
+[deps]
+
+source_file="res://assets/vox/pepperoni.vox"
+dest_files=[ "res://.import/pepperoni.vox-a73cc856c64f1f5bb0f0d966c9158933.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

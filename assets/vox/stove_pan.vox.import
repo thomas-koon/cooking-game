@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/stove_pan.vox-fa0d0d4f4f072586bb51eb49b657ed9f.mesh"
+
+[deps]
+
+source_file="res://assets/vox/stove_pan.vox"
+dest_files=[ "res://.import/stove_pan.vox-fa0d0d4f4f072586bb51eb49b657ed9f.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

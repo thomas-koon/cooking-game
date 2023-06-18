@@ -2,34 +2,28 @@ extends KinematicBody
 
 const GRAVITY = 200
 const THROW_INTERPOLATION_SPEED = 5
-const KNOCKBACK_STRENGTH = 50
+const KNOCKBACK_STRENGTH = 20
 var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
 var ingredient_name
 var matching_ingredient
-var has_pan
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	has_pan = false
-	ingredient_name = "stove"
-	matching_ingredient = ""
+	ingredient_name = "pan"
+	matching_ingredient = "stove"
 	projectile_component = ProjectileComponent.new()
 	projectile_component.kb_strength = KNOCKBACK_STRENGTH
 	projectile_component.throw_interpolation_speed = THROW_INTERPOLATION_SPEED
-
+	
 func is_projectile():
 	return true
 	
-func add_pan():
-	has_pan = true
-	get_node("MeshInstance").mesh = load("res://assets/vox/stove_pan.vox")
-	
-func remove_pan():
-	has_pan = false
-	get_node("MeshInstance").mesh = load("res://assets/vox/stove.vox")
-	# spawn a new pan
-	
+func recipe(stove):
+	if stove.has_pan:
+		stove.add_pan()
+		queue_free()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	#apply throwing 

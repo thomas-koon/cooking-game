@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/cooked_sausage.vox-63ab8156fd697992fc6431bed6fe250d.mesh"
+
+[deps]
+
+source_file="res://assets/vox/cooked_sausage.vox"
+dest_files=[ "res://.import/cooked_sausage.vox-63ab8156fd697992fc6431bed6fe250d.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

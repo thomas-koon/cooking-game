@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Stove1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Smiler.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Pan.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PhysicsMaterial" id=3]
 rough = true
@@ -35,6 +36,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.29473, 7.44509 )
 visible = false
 
 [node name="KinematicBody" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.60777, -6.85331 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.7566, 7.60777, -6.85331 )
 
 [node name="KinematicBody2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, 5.57149, 0 )
+
+[node name="KinematicBody3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.748635, 14.044, -8.11123 )

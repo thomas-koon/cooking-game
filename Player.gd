@@ -74,7 +74,7 @@ func _process(_delta):
 		if(holding == null):
 			if raycast.is_colliding():
 				var obj = raycast.get_collider();
-				if(obj.has_method("is_projectile")):
+				if(obj.is_in_group("projectile")):
 					holding = obj;
 		else: # drop it
 			holding = null;
