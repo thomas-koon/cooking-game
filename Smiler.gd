@@ -24,7 +24,7 @@ func _ready():
 	connect("dash_hit", player, "knockback")
 
 func _physics_process(delta):
-	var position = player.global_transform.origin
+	var position = player.global_transform.origin #player's position
 	var direction = (position - global_transform.origin).normalized()
 	var distance = global_transform.origin.distance_to(position)
 	# USE STATES

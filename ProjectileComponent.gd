@@ -11,6 +11,9 @@ var throw_interpolation_speed
 func _ready():
 	justThrown = false
 	throw_vec = Vector3.ZERO
+	
+func is_projectile():
+	return true
 
 func throw(projectile, dir, mag):
 	justThrown = true
@@ -41,6 +44,6 @@ func hit(projectile, collision):
 		# part of a recipe?
 		if collision.get_collider().is_in_group("projectile"):
 			var item = collision.get_collider()
-			if item.ingredient_name == projectile.matching_ingredient:
+			if projectile.matching_ingredients.has(item.ingredient_name):
 				# collided.recipe(thrown)
 				item.recipe(projectile) # each recipe component will have its own recipe() function

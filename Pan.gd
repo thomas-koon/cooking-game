@@ -6,16 +6,16 @@ const KNOCKBACK_STRENGTH = 20
 var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
 var ingredient_name
-var matching_ingredient
+var matching_ingredients
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ingredient_name = "pan"
-	matching_ingredient = "stove"
+	matching_ingredients = ["stove"]
 	projectile_component = ProjectileComponent.new()
 	projectile_component.kb_strength = KNOCKBACK_STRENGTH
 	projectile_component.throw_interpolation_speed = THROW_INTERPOLATION_SPEED
-	
+
 func is_projectile():
 	return true
 
@@ -29,6 +29,6 @@ func _physics_process(delta):
 	for index in range(get_slide_count()):
 		var collision = get_slide_collision(index)
 		if (collision.get_collider() == null):
-		   continue
+			continue
 		else:
 			projectile_component.hit(self, collision)
