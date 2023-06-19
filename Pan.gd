@@ -26,9 +26,4 @@ func _physics_process(delta):
 	velocity.y -= delta * GRAVITY;
 	move_and_slide(velocity, Vector3.UP, false, 4, 0.785398, false)
 	projectile_component.slow_throw(self, delta)
-	for index in range(get_slide_count()):
-		var collision = get_slide_collision(index)
-		if (collision.get_collider() == null):
-			continue
-		else:
-			projectile_component.hit(self, collision)
+	projectile_component.detect_collision(self)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/vox/pizza_crust.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://ProjectileComponent.gd" type="Script" id=2]
+[ext_resource path="res://Pizza.gd" type="Script" id=3]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -0.400088, 0, -2, -0.700147, 0, -1.90036, -0.400088, 0.2, -2, 0.499706, 0, -2, -0.700147, 0.2, -1.90036, -1.10023, 0, -1.70032, 0.499706, 0.2, -2, 0.799765, 0, -1.90036, -1.10023, 0.2, -1.70032, -1.60032, 0, -1.20023, 0.799765, 0.2, -1.90036, 1.19984, 0, -1.70032, -1.60032, 0.2, -1.20023, -1.80036, 0, -0.800147, 1.19984, 0.2, -1.70032, 1.69994, 0, -1.20023, -1.80036, 0.2, -0.800147, -1.9, 0, -0.500088, 1.69994, 0.2, -1.20023, 1.89998, 0, -0.800147, -1.9, 0.2, -0.500088, -1.9, 0, 0.399706, 1.89998, 0.2, -0.800147, 2, 0, -0.500088, -1.9, 0.2, 0.399706, -1.80036, 0, 0.699765, 2, 0.2, -0.500088, 2, 0, 0.399706, -1.80036, 0.2, 0.699765, -1.60032, 0, 1.09984, 2, 0.2, 0.399706, 1.89998, 0, 0.699765, -1.60032, 0.2, 1.09984, -1.10023, 0, 1.59994, 1.89998, 0.2, 0.699765, 1.69994, 0, 1.09984, -1.10023, 0.2, 1.59994, -0.700147, 0, 1.79998, 1.69994, 0.2, 1.09984, 1.19984, 0, 1.59994, -0.700147, 0.2, 1.79998, -0.400088, 0, 1.9, 1.19984, 0.2, 1.59994, 0.799765, 0, 1.79998, -0.400088, 0.2, 1.9, 0.499706, 0, 1.9, 0.799765, 0.2, 1.79998, 0.499706, 0.2, 1.9 )
+
+[node name="KinematicBody" type="KinematicBody" groups=["projectile"]]
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="ProjectileComponent" type="Node" parent="."]
+script = ExtResource( 2 )

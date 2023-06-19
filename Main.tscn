@@ -1,10 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Stove1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Smiler.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Pan.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sausage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HotDog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Mustard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://PizzaOven.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Pepperoni.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Pizza.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Cheese.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Tomato.tscn" type="PackedScene" id=12]
 
 [sub_resource type="PhysicsMaterial" id=3]
 rough = true
@@ -45,5 +52,26 @@ transform = Transform( 2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, 5.57149, 0 )
 [node name="KinematicBody3" parent="." instance=ExtResource( 4 )]
 transform = Transform( 2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 10.2675, 9.74272, 0 )
 
-[node name="KinematicBody4" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.794691, 8.71609, 0 )
+[node name="KinematicBody7" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 14.2858, 0 )
+
+[node name="KinematicBody4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.3658, 17.6639, 0 )
+
+[node name="KinematicBody6" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -19.9214, 9.43957, 0 )
+
+[node name="KinematicBody8" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09329, 9.75795, -32.2988 )
+
+[node name="KinematicBody9" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.98253, -11.6608 )
+
+[node name="KinematicBody5" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5774, 14.8883, 0.0871582 )
+
+[node name="KinematicBody10" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1801, 6.02918, 0 )
+
+[node name="KinematicBody11" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.37668, 11.0949 )

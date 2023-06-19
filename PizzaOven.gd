@@ -2,19 +2,18 @@ extends KinematicBody
 
 const GRAVITY = 200
 const THROW_INTERPOLATION_SPEED = 5
-const KNOCKBACK_STRENGTH = 20
+const KNOCKBACK_STRENGTH = 50
 var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
 var ingredient_name
 var matching_ingredients
-
-var cooked
+var has_pan
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	cooked = false
-	ingredient_name = "sausage"
-	matching_ingredients = ["stove", "hotdog"]
+	has_pan = false
+	ingredient_name = "pizza_oven"
+	matching_ingredients = [""]
 	projectile_component = ProjectileComponent.new()
 	projectile_component.kb_strength = KNOCKBACK_STRENGTH
 	projectile_component.throw_interpolation_speed = THROW_INTERPOLATION_SPEED
@@ -22,9 +21,13 @@ func _ready():
 func is_projectile():
 	return true
 	
-func cook():
-	cooked = true
-	get_node("MeshInstance").mesh = load("res://assets/vox/cooked_sausage.vox")
+func recipe(item):
+	if item.ingredient_name == "pizza":
+		if item.state == item.States.PEPPERONI:
+			item.cook()
+	else:
+		pass
+		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

@@ -28,6 +28,14 @@ func add_throw(projectile):
 func slow_throw(projectile, delta):
 	throw_vec = throw_vec.linear_interpolate(Vector3.ZERO, throw_interpolation_speed * delta)
 	
+func detect_collision(projectile):
+	for index in range(projectile.get_slide_count()):
+		var collision = projectile.get_slide_collision(index)
+		if (collision.get_collider() == null):
+			continue
+		else:
+			hit(projectile, collision)
+	
 func hit(projectile, collision):
 	if justThrown:
 		justThrown = false
