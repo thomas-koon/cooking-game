@@ -5,7 +5,7 @@ const GRAVITY = 40; # downward acceleration in m/s^2
 const JUMP_IMPULSE = 20;
 const KB_INTERPOLATION_SPEED = 3;
 const SPEED = 40; # movement speed in m/s
-const THROW_STRENGTH = 2
+var throw_strength
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
 var holding;
@@ -16,6 +16,7 @@ onready var camera = $Head/Camera;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	throw_strength = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
 
 func _input(event):
@@ -61,13 +62,17 @@ func _physics_process(delta):
 
 func _process(_delta):
 	#holding 
+	if Input.is_action_just_released("throw"):
+		print("woof")
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
-		if(Input.is_action_just_pressed("throw")):
-			var obj = holding;
-			holding = null;
-			obj.projectile_component.throw(obj, ((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), THROW_STRENGTH)
-			print("throw");
+		if Input.is_action_pressed("throw") and throw_strength < 4:
+			throw_strength += 0.02
+		if Input.is_action_just_released("throw"):
+			var obj = holding
+			holding = null; 
+			obj.projectile_component.throw(obj, ((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), throw_strength)
+			throw_strength = 0
 	else:
 		pass;
 	if Input.is_action_just_pressed("pickup"):
