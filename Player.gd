@@ -9,9 +9,11 @@ var throw_strength
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
 var holding;
+var last_viewed_customer
 
 onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast;
+onready var raycast2 = $Head/Camera/RayCast2;
 onready var camera = $Head/Camera;
 
 # Called when the node enters the scene tree for the first time.
@@ -61,9 +63,18 @@ func _physics_process(delta):
 	kb = kb.linear_interpolate(Vector3.ZERO, KB_INTERPOLATION_SPEED * delta)
 
 func _process(_delta):
-	#holding 
-	if Input.is_action_just_released("throw"):
-		print("woof")
+	if raycast2.is_colliding():
+		var looking = raycast2.get_collider()
+		if looking == null:
+			pass
+		else:
+			if looking.has_method("show_food"):
+				last_viewed_customer = looking
+				looking.show_food()
+	else:
+		if last_viewed_customer != null:
+			last_viewed_customer.hide_food()
+	
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
 		if Input.is_action_pressed("throw") and throw_strength < 4:
@@ -79,7 +90,7 @@ func _process(_delta):
 		if(holding == null):
 			if raycast.is_colliding():
 				var obj = raycast.get_collider();
-				if(obj.is_in_group("projectile")):
+				if obj.is_in_group("projectile"):
 					holding = obj;
 		else: # drop it
 			holding = null;
