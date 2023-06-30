@@ -5,6 +5,7 @@ const THROW_INTERPOLATION_SPEED = 5
 const KNOCKBACK_STRENGTH = 50
 var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
+var shop_component : ShopComponent
 var ingredient_name
 var matching_ingredients
 var has_pan
@@ -14,6 +15,7 @@ func _ready():
 	has_pan = false
 	ingredient_name = "stove"
 	matching_ingredients = [""]
+	shop_component = ShopComponent.new()
 	projectile_component = ProjectileComponent.new()
 	projectile_component.kb_strength = KNOCKBACK_STRENGTH
 	projectile_component.throw_interpolation_speed = THROW_INTERPOLATION_SPEED
@@ -50,9 +52,11 @@ func recipe(item):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	shop_component.spin(self, delta)
+	"""
 	#apply throwing 
 	projectile_component.add_throw(self)
 	velocity.y -= delta * GRAVITY;
 	move_and_slide(velocity, Vector3.UP, false, 4, 0.785398, false)
 	projectile_component.slow_throw(self, delta)
-	projectile_component.detect_collision(self)
+	projectile_component.detect_collision(self) """
