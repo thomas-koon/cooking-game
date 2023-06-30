@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://interface/WaveTimer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://interface/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 41
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Label" instance=ExtResource( 1 )]
+custom_fonts/font = SubResource( 1 )
+text = "Wave X"

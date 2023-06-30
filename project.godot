@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ProjectileComponent",
 "language": "GDScript",
-"path": "res://ProjectileComponent.gd"
+"path": "res://projectiles/ProjectileComponent.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",

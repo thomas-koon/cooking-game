@@ -20,7 +20,7 @@ func _ready():
 
 func is_projectile():
 	return true
-	
+
 func add_pan():
 	has_pan = true
 	get_node("MeshInstance").mesh = load("res://assets/vox/stove_pan.vox")
@@ -39,7 +39,7 @@ func recipe(item):
 		if item.cooked == false and has_pan == true:
 			item.cook()
 			remove_pan()
-			var new_pan = load("res://Pan.tscn")
+			var new_pan = load("res://projectiles/Pan.tscn")
 			var spawn_pan = new_pan.instance()
 			spawn_pan.translation = global_transform.origin
 			spawn_pan.translation.y += 10
