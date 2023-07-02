@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/vox/cheese.vox" type="ArrayMesh" id=1]
 [ext_resource path="res://projectiles/Cheese.gd" type="Script" id=2]
 [ext_resource path="res://projectiles/ProjectileComponent.gd" type="Script" id=3]
+[ext_resource path="res://projectiles/ShopComponent.gd" type="Script" id=4]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 2, 4, 2, 2, 0, 2, 2, 4, -2, -2, 4, 2, 2, 0, -2, -2, 0, 2, -2, 4, -2, -2, 0, -2 )
@@ -18,3 +19,6 @@ shape = SubResource( 1 )
 
 [node name="ProjectileComponent" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="ShopComponent" type="Node" parent="."]
+script = ExtResource( 4 )

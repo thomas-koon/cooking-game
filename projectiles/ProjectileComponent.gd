@@ -1,6 +1,7 @@
 extends Node
 class_name ProjectileComponent
 
+var gravity
 var justThrown : bool
 var throw_vec : Vector3
 var launch : Vector3
@@ -14,6 +15,14 @@ func _ready():
 	
 func is_projectile():
 	return true
+	
+func update_projectile(projectile, delta):
+	#apply throwing 
+	add_throw(projectile)
+	projectile.velocity.y -= delta * gravity;
+	projectile.move_and_slide(projectile.velocity, Vector3.UP, false, 4, 0.785398, false)
+	slow_throw(projectile, delta)
+	detect_collision(projectile)
 
 func throw(projectile, dir, mag):
 	justThrown = true

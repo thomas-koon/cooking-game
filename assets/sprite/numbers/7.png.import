@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spaceship.png-8c82aae814e385ba8c70d88184ff234a.stex"
+path="res://.import/7.png-888b393661d81345d461c9eaa3195234.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprite/spaceship.png"
-dest_files=[ "res://.import/spaceship.png-8c82aae814e385ba8c70d88184ff234a.stex" ]
+source_file="res://assets/sprite/numbers/7.png"
+dest_files=[ "res://.import/7.png-888b393661d81345d461c9eaa3195234.stex" ]
 
 [params]
 

@@ -34,10 +34,10 @@ func _ready():
 	timer.start()
 	pass # Replace with function body.
 	
-func show_food():
+func hover_show():
 	request_bubble.visible = true
 	
-func hide_food():
+func hover_hide():
 	request_bubble.visible = false
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/vox/stove.vox" type="ArrayMesh" id=1]
 [ext_resource path="res://projectiles/Stove1.gd" type="Script" id=2]
 [ext_resource path="res://projectiles/ProjectileComponent.gd" type="Script" id=3]
 [ext_resource path="res://projectiles/ShopComponent.gd" type="Script" id=4]
+[ext_resource path="res://PriceTag.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0.399961, 0.399922, 0.6, -0.400059, 0.399922, 0.6, 0.399961, 0.299902, 0.6, 0.5, 0.499941, 0.499971, -0.400059, 0.299902, 0.6, -0.5, 0.499941, 0.499971, 0.5, -0.5, 0.499971, 0.5, 0.8, -0.400078, -0.5, -0.5, 0.499971, -0.5, 0.8, -0.400078, 0.5, -0.5, -0.5, 0.5, 0.8, -0.5, -0.5, -0.5, -0.5, -0.5, 0.8, -0.5 )
@@ -25,3 +26,6 @@ script = ExtResource( 3 )
 
 [node name="ShopComponent" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="Spatial" parent="." instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 0, 2.19715, 0 )

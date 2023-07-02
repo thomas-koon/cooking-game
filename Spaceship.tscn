@@ -10,11 +10,6 @@ points = PoolVector3Array( -0.500088, 1.09979, -2, -0.300049, 0, -0.700127, -0.8
 [node name="KinematicBody" type="KinematicBody"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 script = ExtResource( 2 )
-wave = null
-distance = null
-movement_speed = null
-food_type = null
-movement_type = null
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )

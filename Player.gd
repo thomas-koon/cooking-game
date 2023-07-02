@@ -9,7 +9,7 @@ var throw_strength
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
 var holding;
-var last_viewed_customer
+var hovering
 
 onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast;
@@ -68,12 +68,13 @@ func _process(_delta):
 		if looking == null:
 			pass
 		else:
-			if looking.has_method("show_food"):
-				last_viewed_customer = looking
-				looking.show_food()
+			if looking.has_method("hover_show"):
+				hovering = looking
+				looking.hover_show()
 	else:
-		if last_viewed_customer != null:
-			last_viewed_customer.hide_food()
+		if hovering != null:
+			if hovering.has_method("hover_hide"):
+				hovering.hover_hide()
 	
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
