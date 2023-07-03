@@ -11,6 +11,7 @@ var has_pan
 
 export var price : int
 var shop_component: ShopComponent
+onready var price_tag: Spatial = $PriceTag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +28,13 @@ func _ready():
 func is_projectile():
 	return true
 	
+func hover_show():
+	if !shop_component.bought:
+		price_tag.visible = true
+	
+func hover_hide():
+	price_tag.visible = false
+
 func recipe(item):
 	if item.ingredient_name == "pizza":
 		if item.state == item.States.PEPPERONI:
@@ -37,7 +45,9 @@ func recipe(item):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	hover_hide()
 	if shop_component.bought:
 		projectile_component.update_projectile(self, delta)
 	else:
+		price_tag.billboard()
 		shop_component.bob_and_spin(self, delta)

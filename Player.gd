@@ -10,14 +10,18 @@ var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
 var holding;
 var hovering
+var coins
 
 onready var head = $Head;
-onready var raycast = $Head/Camera/RayCast;
+onready var raycast = $Head/Camera/RayCast1;
 onready var raycast2 = $Head/Camera/RayCast2;
 onready var camera = $Head/Camera;
+onready var ui = get_parent().get_node("UI")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	coins = 100
+	ui.update_coins(99)
 	throw_strength = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
 
@@ -63,6 +67,17 @@ func _physics_process(delta):
 	kb = kb.linear_interpolate(Vector3.ZERO, KB_INTERPOLATION_SPEED * delta)
 
 func _process(_delta):
+	for index in range(get_slide_count()):
+		var collision = get_slide_collision(index)
+		var obj = collision.get_collider()
+		if obj == null:
+		   continue
+		else:
+			if obj.is_in_group("projectile") and obj.has_method("hover_show"):
+				if coins >= obj.price:
+					coins = coins - obj.price
+					obj.shop_component.bought = true
+					ui.update_coins(coins)
 	if raycast2.is_colliding():
 		var looking = raycast2.get_collider()
 		if looking == null:
@@ -71,11 +86,6 @@ func _process(_delta):
 			if looking.has_method("hover_show"):
 				hovering = looking
 				looking.hover_show()
-	else:
-		if hovering != null:
-			if hovering.has_method("hover_hide"):
-				hovering.hover_hide()
-	
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
 		if Input.is_action_pressed("throw") and throw_strength < 4:

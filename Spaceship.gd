@@ -42,6 +42,7 @@ func hover_hide():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	hover_hide()
 	# get parent wave or something like that
 	# use a timer to change direction
 	# time = distance/speed
@@ -63,7 +64,6 @@ func _process(delta):
 					obj.queue_free()
 					player.last_viewed_customer = null
 					queue_free()
-			
 
 func _on_Timer_timeout():
 	movementDirection *= -1

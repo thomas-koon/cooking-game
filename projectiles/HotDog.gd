@@ -10,6 +10,7 @@ var ingredient_name
 var matching_ingredients
 
 var shop_component: ShopComponent
+onready var price_tag: Spatial = $PriceTag
 
 enum States {BUN, SAUSAGE, MUSTARD}
 var state
@@ -25,6 +26,13 @@ func _ready():
 	projectile_component.kb_strength = KNOCKBACK_STRENGTH
 	projectile_component.throw_interpolation_speed = THROW_INTERPOLATION_SPEED
 	projectile_component.gravity = GRAVITY
+
+func hover_show():
+	if !shop_component.bought:
+		price_tag.visible = true
+	
+func hover_hide():
+	price_tag.visible = false
 
 func is_projectile():
 	return true
@@ -45,8 +53,10 @@ func recipe(item):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	hover_hide()
 	if shop_component.bought:
 		projectile_component.update_projectile(self, delta)
 	else:
+		price_tag.billboard()
 		shop_component.bob_and_spin(self, delta)
 	
