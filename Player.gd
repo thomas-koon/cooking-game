@@ -20,7 +20,7 @@ onready var ui = get_parent().get_node("UI")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	coins = 100
+	coins = 99
 	ui.update_coins(99)
 	throw_strength = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
