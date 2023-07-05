@@ -32,6 +32,7 @@ shape = SubResource( 3 )
 [node name="Camera" type="Camera" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85039, -0.453385 )
 fov = 101.6
+far = 200.0
 
 [node name="RayCast1" type="RayCast" parent="Head/Camera"]
 enabled = true

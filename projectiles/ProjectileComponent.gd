@@ -8,6 +8,8 @@ var launch : Vector3
 var kb_strength
 var throw_interpolation_speed
 
+onready var player = get_tree().get_nodes_in_group("player")[0];
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	justThrown = false

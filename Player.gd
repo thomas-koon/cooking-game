@@ -74,7 +74,7 @@ func _process(_delta):
 		   continue
 		else:
 			if obj.is_in_group("projectile") and obj.has_method("hover_show"):
-				if coins >= obj.price:
+				if coins >= obj.price and !obj.shop_component.bought:
 					coins = coins - obj.price
 					obj.shop_component.bought = true
 					ui.update_coins(coins)
