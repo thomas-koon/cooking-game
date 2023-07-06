@@ -26,5 +26,10 @@ script = ExtResource( 3 )
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.728
 
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 0, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -0.00218582, 0.0417185, 0.199032 )
+enabled = true
+cast_to = Vector3( 0, -1, 10 )
+
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

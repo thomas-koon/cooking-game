@@ -1,5 +1,7 @@
 extends KinematicBody
 
+export var wave : int
+
 const GRAVITY = 40;
 const ROTATION_SPEED = 8;
 const DASH_SPEED = 4;
@@ -16,11 +18,17 @@ signal dash_hit
 enum States {IDLE, LOOKING, JUMPING, DASHING}
 var _state : int = States.IDLE
 
+onready var raycast = $RayCast
 onready var player = get_tree().get_nodes_in_group("player")[0];
 onready var stateTimer: Timer = $StateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if wave == 0:
+		visible = true
+	else:
+		visible = false
+	_state = States.IDLE
 	stateTimer.start()
 
 func _physics_process(delta):
@@ -88,7 +96,14 @@ func _physics_process(delta):
 					
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	# stop dash if about to fall off edge
+	if raycast.get_collider() == null and _state == States.DASHING:
+		print("killself")
+		velocity.x = 0
+		velocity.z = 0
+		dashing = false
+	if get_parent().wave == wave:
+		visible = true
 	
 func look(delta, position, direction):
 	var targetRotation = direction.angle_to(Vector3(0, 0, -1))
@@ -117,7 +132,7 @@ func _on_StateTimer_timeout():
 	var direction = position - transform.origin;
 	var distance = global_transform.origin.distance_to(position)
 	# only change states while grounded
-	if !is_on_floor():
+	if !is_on_floor() || get_parent().wave < wave:
 		_state = _state
 	else:
 		if _state == States.IDLE:

@@ -18,4 +18,3 @@ func update_timer(seconds):
 	var minutes = (seconds/60)%60
 	var seconds1 = seconds%60
 	timer.text = str("%02d:%02d" % [minutes, seconds1])
-	

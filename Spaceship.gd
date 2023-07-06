@@ -18,6 +18,7 @@ var showing_food
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = false
 	$Sprite3D.visible = false
 	if food_type == FoodType.HOT_DOG:
 		request_bubble.texture = load("res://assets/sprite/ask_hotdog.png")
@@ -31,9 +32,7 @@ func _ready():
 		velocity = global_transform.basis.y
 	movementDirection = movement_speed
 	timer.set_wait_time(distance / movement_speed)
-	timer.start()
-	pass # Replace with function body.
-	
+
 func hover_show():
 	request_bubble.visible = true
 	
@@ -42,6 +41,9 @@ func hover_hide():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if get_parent().wave == wave:
+		visible = true
+		timer.start()
 	hover_hide()
 	# get parent wave or something like that
 	# use a timer to change direction
