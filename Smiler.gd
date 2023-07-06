@@ -98,7 +98,6 @@ func _physics_process(delta):
 func _process(delta):
 	# stop dash if about to fall off edge
 	if raycast.get_collider() == null and _state == States.DASHING:
-		print("killself")
 		velocity.x = 0
 		velocity.z = 0
 		dashing = false
