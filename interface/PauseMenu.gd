@@ -11,9 +11,13 @@ func set_paused(pause1):
 	paused = pause1
 	get_tree().paused = paused
 	visible = paused
+	if paused:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_ResumeBtn_pressed():
-	paused = false
+	set_paused(false)
 
 func _on_QuitBtn_pressed():
 	get_tree().quit()

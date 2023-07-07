@@ -78,7 +78,7 @@ func _physics_process(delta):
 					player.holding = null
 					player.knockback(dash_direction, 2)
 				else:
-					obj.projectile_component.throw(obj, dash_direction, DASH_SPEED)
+					obj.projectile_component.throw(obj, dash_direction, DASH_SPEED / 4)
 		if obj.is_in_group("player"):
 			# if on top of player
 			if Vector3.UP.dot(collision.get_normal()) > 0.1:

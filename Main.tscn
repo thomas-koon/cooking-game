@@ -18,7 +18,7 @@ size = Vector3( 60, 2, 60 )
 
 [node name="Main" type="Node" groups=["stage"]]
 script = ExtResource( 5 )
-waves = [ 3, 3 ]
+waves = [ 12, 3 ]
 
 [node name="UI" parent="." instance=ExtResource( 13 )]
 __meta__ = {
