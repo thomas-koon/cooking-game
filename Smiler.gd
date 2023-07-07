@@ -6,7 +6,6 @@ const GRAVITY = 40;
 const ROTATION_SPEED = 8;
 const DASH_SPEED = 4;
 const KB_INTERPOLATION_SPEED = 3;
-const HORIZONTAL_JUMP_SPEED = 2
 var velocity = Vector3.ZERO;
 var kb = Vector3.ZERO
 var dashing = false; # even if in DASHING state, this has to be true to dash
@@ -81,11 +80,9 @@ func _physics_process(delta):
 				else:
 					obj.projectile_component.throw(obj, dash_direction, DASH_SPEED)
 		if obj.is_in_group("player"):
-			# if squashing the player
+			# if on top of player
 			if Vector3.UP.dot(collision.get_normal()) > 0.1:
-				# insta death?
-				print("squash")
-				pass
+				velocity.y = 40
 			else: # if not a squash
 				if _state == States.DASHING:
 					dashing = false

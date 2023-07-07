@@ -3,7 +3,8 @@ extends Node
 var wave
 var waveTimeLeft
 export (Array) var waves: Array # time in seconds for each wave
-onready var waveTimer : Timer =  $WaveTimer
+onready var wave_seconds : Timer =  $WaveSeconds
+onready var pause_menu : Control = $PauseMenu
 onready var ui = get_node("UI")
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +13,8 @@ func _ready():
 	waveTimeLeft = waves[wave]
 	ui.update_wave(wave)
 	ui.update_timer(waveTimeLeft)
-	waveTimer.start()
+	wave_seconds.start()
+	pause_menu.set_paused(false)
 	
 func getCurrentCustomers():
 	var nodes = get_tree().get_nodes_in_group("customer")
@@ -22,10 +24,10 @@ func getCurrentCustomers():
 			count += 1
 	return count
 
-func _on_WaveTimer_timeout():
+func _on_WaveSeconds_timeout():
 	waveTimeLeft-=1
 	ui.update_timer(waveTimeLeft)
-	waveTimer.start()
+	wave_seconds.start()
 	if waveTimeLeft == 0:
 		if getCurrentCustomers() == 0:
 			print("wave cleared")
@@ -40,5 +42,3 @@ func _on_WaveTimer_timeout():
 		else:
 			print("wave failed")
 			get_tree().quit()
-		
-	
