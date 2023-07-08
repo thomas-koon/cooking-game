@@ -20,8 +20,8 @@ onready var ui = get_parent().get_node("UI")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	coins = 99
-	ui.update_coins(99)
+	coins = 0
+	ui.update_coins(coins)
 	throw_strength = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # hide cursor
 
@@ -90,9 +90,13 @@ func _process(_delta):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
 		if Input.is_action_pressed("throw") and throw_strength < 4:
 			throw_strength += 0.02
+			raycast.rotation_degrees.x -= 0.2
+			raycast.rotation_degrees.y -= 0.2
 		if Input.is_action_just_released("throw"):
 			var obj = holding
 			holding = null; 
+			raycast.rotation_degrees.x = 0
+			raycast.rotation_degrees.y = 0
 			obj.projectile_component.throw(obj, ((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), throw_strength)
 			throw_strength = 0
 	else:

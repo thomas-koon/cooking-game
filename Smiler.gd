@@ -77,8 +77,7 @@ func _physics_process(delta):
 				if player.holding == obj:
 					player.holding = null
 					player.knockback(dash_direction, 2)
-				else:
-					obj.projectile_component.throw(obj, dash_direction, DASH_SPEED / 4)
+				obj.velocity.y += 20
 		if obj.is_in_group("player"):
 			# if on top of player
 			if Vector3.UP.dot(collision.get_normal()) > 0.1:
@@ -88,8 +87,9 @@ func _physics_process(delta):
 					dashing = false
 					velocity.x = 0
 					velocity.z = 0
-					player.knockback(dash_direction, 2)
-					print("dash hit")
+					player.knockback(dash_direction, 3)
+				if _state == States.JUMPING and !is_on_floor():
+					player.knockback(direction, 3)
 					
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -107,7 +107,7 @@ func look(delta, position, direction):
 	rotation.y = lerp_angle(rotation.y, atan2(direction.x, direction.z), delta*ROTATION_SPEED)
 	
 func jump(distance, position, direction):
-	var jumpHeight = abs((position.y - global_transform.origin.y) * 1.1)
+	var jumpHeight = abs((position.y - global_transform.origin.y) * 1)
 	var verticalVelocity = sqrt(2.0 * GRAVITY * jumpHeight) 
 	velocity.x = direction.x * distance
 	velocity.y = verticalVelocity
