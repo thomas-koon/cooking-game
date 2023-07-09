@@ -8,7 +8,7 @@ var projectile_component : ProjectileComponent
 var shop_component : ShopComponent
 var ingredient_name
 var matching_ingredients
-
+export var wave : int
 export var price : int
 onready var price_tag: Spatial = $PriceTag
 

@@ -25,7 +25,6 @@ margin_bottom = 15.0
 rect_scale = Vector2( 1.5, 1.5 )
 text = "Game i made about making human fast food on an alien planet and you work in the drive thru but instead of cars its alien spaceships that fly and you have to throw the food at the spaceships before time runs out and to make food you have to throw ingredients and cookware at each other in specific orders and also you have to use said ingredients and cookware as projectile weapons against cubic smiling enemies who will try to knock you over the edge of your restaurant which is just a bunch of floating platforms in the sky configured differently depending on the level also if you accidentally throw your ingredients or cookware over the edge you have to buy new ones with the alien planet currency which you get by defeating hostile enemies "
 autowrap = true
-percent_visible = -0.00165289
 
 [node name="StartButton" type="Button" parent="."]
 anchor_left = 0.697

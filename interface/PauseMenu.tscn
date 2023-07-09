@@ -15,14 +15,22 @@ color = Color( 0.329412, 0.0352941, 0.482353, 0.545098 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 257.0
-margin_top = 137.0
-margin_right = 297.0
-margin_bottom = 151.0
-text = "Pizza:
+margin_top = 106.0
+margin_right = 378.0
+margin_bottom = 321.0
+text = "-> throw at
+
+Pizza:
 cheese -> crust
 tomato -> crust
 pepperoni -> crust
-crust -> pizza oven"
+crust -> pizza oven
+
+Hot dog with mustard
+Pan -> stove
+raw sausage -> pan
+sausage -> bun
+Mustard -> hotdog"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5

@@ -4,6 +4,7 @@ const GRAVITY = 200
 const THROW_INTERPOLATION_SPEED = 5
 const KNOCKBACK_STRENGTH = 50
 export var price : int
+export var wave : int
 var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
 var shop_component : ShopComponent

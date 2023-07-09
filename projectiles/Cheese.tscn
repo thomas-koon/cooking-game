@@ -9,7 +9,7 @@
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 2, 4, 2, 2, 0, 2, 2, 4, -2, -2, 4, 2, 2, 0, -2, -2, 0, 2, -2, 4, -2, -2, 0, -2 )
 
-[node name="KinematicBody" type="KinematicBody" groups=["projectile"]]
+[node name="KinematicBody" type="KinematicBody" groups=["projectile", "wave_spawn"]]
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

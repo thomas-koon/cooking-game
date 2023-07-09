@@ -10,7 +10,7 @@ var matching_ingredients
 
 enum States {RAW, CHEESE, TOMATO, PEPPERONI, COOKED}
 var state
-
+export var wave : int
 export var price : int
 var shop_component: ShopComponent
 onready var price_tag: Spatial = $PriceTag

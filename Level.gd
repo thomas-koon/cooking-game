@@ -4,12 +4,11 @@ var wave
 var waveTimeLeft
 export (Array) var waves: Array # time in seconds for each wave
 export var coins_per_mob: int
-export var mob_distance_threshold: int
 export var fall_threshold: int
-onready var wave_seconds : Timer =  $WaveSeconds
-onready var pause_menu : Control = $PauseMenu
-onready var ui = get_node("UI")
-onready var player = get_node("Player")
+onready var wave_seconds : Timer = get_node("WaveSeconds")
+onready var pause_menu : Control = get_node("Interface/PauseMenu")
+onready var ui = get_node("Interface/UI")
+onready var player = get_node("Viewport3D/Viewport/Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,16 +18,27 @@ func _ready():
 	ui.update_timer(waveTimeLeft)
 	wave_seconds.start()
 	pause_menu.set_paused(false)
+	for obj in get_node("Viewport3D/Viewport").get_children():
+		if obj.is_in_group("wave_spawn"):
+			if obj.wave == 0:
+				obj.visible = true
+			else:
+				obj.visible = false
+				obj.get_node("CollisionShape").disabled = true
+				obj.set_physics_process(false)
 	
 func _physics_process(delta):
+	for obj in get_node("Viewport3D/Viewport").get_children():
+		if obj.is_in_group("wave_spawn"):
+			if obj.visible == false and wave == obj.wave:
+				obj.visible = true
+				obj.get_node("CollisionShape").disabled = false
+				obj.set_physics_process(true)
 	if player.global_transform.origin.y < fall_threshold:
 		fail_level()
 	var mobs = get_tree().get_nodes_in_group("mob")
 	for mob in mobs:
-		print(player.global_transform.origin.distance_to(mob.global_transform.origin))
-		if player.global_transform.origin.distance_to(
-			mob.global_transform.origin) > mob_distance_threshold or \
-			mob.global_transform.origin.y < fall_threshold:
+		if mob.global_transform.origin.y < fall_threshold:
 			kill_mob(mob)
 	
 func kill_mob(mob):

@@ -7,7 +7,7 @@ var velocity = Vector3.ZERO;
 var projectile_component : ProjectileComponent
 var ingredient_name
 var matching_ingredients
-
+export var wave : int
 export var price : int
 var shop_component: ShopComponent
 onready var price_tag: Spatial = $PriceTag

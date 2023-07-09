@@ -8,7 +8,7 @@
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( -1, 0.2, -5.7, 0.9, 0.2, -5.7, -1, 0.2, 6.1, -1, 2.2, -5.7, 0.9, 2.2, -5.7, 0.9, 0.2, 6.1, -1, 2.2, 6.1, 0.9, 2.2, 6.1 )
 
-[node name="KinematicBody" type="KinematicBody" groups=["projectile"]]
+[node name="KinematicBody" type="KinematicBody" groups=["projectile", "wave_spawn"]]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 script = ExtResource( 2 )
 

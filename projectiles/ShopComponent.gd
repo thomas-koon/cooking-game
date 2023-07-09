@@ -12,7 +12,7 @@ var price
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	
+
 func setup(item):
 	initLockedPosition = item.translation
 	elapsedLockedTime = 0.0

@@ -17,16 +17,13 @@ signal dash_hit
 enum States {IDLE, LOOKING, JUMPING, DASHING}
 var _state : int = States.IDLE
 
+onready var level = get_parent().get_parent().get_parent()
 onready var raycast = $RayCast
 onready var player = get_tree().get_nodes_in_group("player")[0];
 onready var stateTimer: Timer = $StateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if wave == 0:
-		visible = true
-	else:
-		visible = false
 	_state = States.IDLE
 	stateTimer.start()
 
@@ -87,9 +84,9 @@ func _physics_process(delta):
 					dashing = false
 					velocity.x = 0
 					velocity.z = 0
-					player.knockback(dash_direction, 3)
+					player.knockback(dash_direction, 2)
 				if _state == States.JUMPING and !is_on_floor():
-					player.knockback(direction, 3)
+					player.knockback(direction, 2)
 					
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -98,8 +95,6 @@ func _process(delta):
 		velocity.x = 0
 		velocity.z = 0
 		dashing = false
-	if get_parent().wave == wave:
-		visible = true
 	
 func look(delta, position, direction):
 	var targetRotation = direction.angle_to(Vector3(0, 0, -1))
@@ -128,13 +123,13 @@ func _on_StateTimer_timeout():
 	var direction = position - transform.origin;
 	var distance = global_transform.origin.distance_to(position)
 	# only change states while grounded
-	if !is_on_floor() || get_parent().wave < wave:
+	if !is_on_floor() || !visible:
 		_state = _state
 	else:
 		if _state == States.IDLE:
 			_state = States.LOOKING
 		elif _state == States.LOOKING:
-			if distance > 40 || abs(position.y - global_transform.origin.y) > 1:
+			if distance > 40 || (abs(position.y - global_transform.origin.y) > 1 and player.is_on_floor()):
 				_state = States.JUMPING
 			else:
 				dash_direction = direction

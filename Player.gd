@@ -4,7 +4,7 @@ const MOUSE_SENSITIVITY = 0.04;
 const GRAVITY = 40; # downward acceleration in m/s^2
 const JUMP_IMPULSE = 20;
 const KB_INTERPOLATION_SPEED = 3;
-const SPEED = 40; # movement speed in m/s
+const SPEED = 50; # movement speed in m/s
 var throw_strength
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
@@ -16,7 +16,10 @@ onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast1;
 onready var raycast2 = $Head/Camera/RayCast2;
 onready var camera = $Head/Camera;
-onready var ui = get_parent().get_node("UI")
+
+# i swear this was the only way. it wouldnt work with get_tree()
+onready var root = get_parent().get_parent().get_parent()
+onready var ui = root.get_node("Interface/UI")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,7 +77,7 @@ func _process(_delta):
 		   continue
 		else:
 			if obj.is_in_group("projectile") and obj.has_method("hover_show"):
-				if coins >= obj.price and !obj.shop_component.bought:
+				if coins >= obj.price and !obj.shop_component.bought and obj.visible:
 					coins = coins - obj.price
 					obj.shop_component.bought = true
 					ui.update_coins(coins)
