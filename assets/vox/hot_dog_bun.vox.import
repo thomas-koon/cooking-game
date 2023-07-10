@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/hot_dog_bun.vox-679c35288c8efffa48c8cfe7c8d65964.mesh"
+
+[deps]
+
+source_file="res://assets/vox/hot_dog_bun.vox"
+dest_files=[ "res://.import/hot_dog_bun.vox-679c35288c8efffa48c8cfe7c8d65964.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

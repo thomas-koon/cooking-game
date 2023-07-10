@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/spaceship.vox-5e8a8d889211dcb09b60a16261b51ceb.mesh"
+
+[deps]
+
+source_file="res://assets/vox/spaceship.vox"
+dest_files=[ "res://.import/spaceship.vox-5e8a8d889211dcb09b60a16261b51ceb.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

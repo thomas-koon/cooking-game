@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/vox/spaceship.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://SpeechBubble.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprite/ask_hotdog.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends KinematicBody
+
+enum FoodType {HOT_DOG, PIZZA}
+
+export var wave: int
+export var distance: int
+export (FoodType) var food_type
+
+onready var request_bubble: Sprite3D = $Sprite3D
+onready var player = get_tree().get_nodes_in_group(\"player\")[0];
+var velocity: Vector3
+var showing_food
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	visible = false
+	request_bubble.visible = false
+	if food_type == FoodType.HOT_DOG:
+		request_bubble.texture = load(\"res://assets/sprite/ask_hotdog.png\")
+	elif food_type == FoodType.PIZZA:
+		request_bubble.texture = load(\"res://assets/sprite/ask_pizza.png\")
+	else:
+		pass
+
+func hover_show():
+	print(\"shpwn\")
+	request_bubble.visible = true
+	
+func hover_hide():
+	print(\"hide\")
+	request_bubble.visible = false
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	for index in range(get_slide_count()):
+		var collision = get_slide_collision(index)
+		var obj = collision.get_collider()
+		if obj == null:
+		   continue
+		if obj.is_in_group(\"projectile\"):
+			print(\"ship hit mayady mayday\")
+			if obj.ingredient_name == \"hotdog\" and food_type == FoodType.HOT_DOG:
+				if obj.state == obj.States.MUSTARD:
+					print(\"hot dog hit\")
+					obj.visible = false
+					obj.get_node(\"CollisionShape\").disabled = true
+					obj.set_physics_process(false)
+					visible = false
+					get_node(\"CollisionShape\").disabled = true
+					set_physics_process(false)
+			if obj.ingredient_name == \"pizza\" and food_type == FoodType.PIZZA:
+				if obj.state == obj.States.COOKED:
+					obj.visible = false
+					obj.get_node(\"CollisionShape\").disabled = true
+					obj.set_physics_process(false)
+					visible = false
+					get_node(\"CollisionShape\").disabled = true
+					set_physics_process(false)
+"
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="KinematicBody" type="KinematicBody" groups=["customer", "wave_spawn"]]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+script = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.75, 0, 0, 0, 1.4, 0, 0, 0, 1.75, 0, 1.0657, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite3D" parent="." instance=ExtResource( 3 )]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 14.7022, 0 )
+texture = ExtResource( 4 )

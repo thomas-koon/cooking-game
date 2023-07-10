@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/mustard.vox-fc73568c49bc445b631e57edd557461b.mesh"
+
+[deps]
+
+source_file="res://assets/vox/mustard.vox"
+dest_files=[ "res://.import/mustard.vox-fc73568c49bc445b631e57edd557461b.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

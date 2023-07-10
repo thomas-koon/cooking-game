@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/pizza_crust_tomato.vox-93d9e4247b2ab8832d274c08a3714440.mesh"
+
+[deps]
+
+source_file="res://assets/vox/pizza_crust_tomato.vox"
+dest_files=[ "res://.import/pizza_crust_tomato.vox-93d9e4247b2ab8832d274c08a3714440.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

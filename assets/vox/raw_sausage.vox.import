@@ -1,0 +1,17 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+path="res://.import/raw_sausage.vox-4e03be397b499b022b410434f9b98e8b.mesh"
+
+[deps]
+
+source_file="res://assets/vox/raw_sausage.vox"
+dest_files=[ "res://.import/raw_sausage.vox-4e03be397b499b022b410434f9b98e8b.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
