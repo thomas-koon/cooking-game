@@ -17,6 +17,7 @@ onready var price_tag: Spatial = $PriceTag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hover_hide()
 	state = States.RAW
 	ingredient_name = "pizza"
 	matching_ingredients = ["pizza_oven"]
@@ -46,24 +47,30 @@ func recipe(item):
 		if state == States.RAW:
 			state = States.TOMATO
 			get_node("MeshInstance").mesh = load("res://assets/vox/pizza_crust_tomato.vox")
-			item.queue_free()
+			item.visible = false
+			item.get_node("CollisionShape").disabled = true
+			item.set_physics_process(false)
 	elif item.ingredient_name == "cheese":
 		if state == States.TOMATO:
 			state = States.CHEESE
 			get_node("MeshInstance").mesh = load("res://assets/vox/pizza_crust_tomato_cheese.vox")
-			item.queue_free()
+			item.visible = false
+			item.get_node("CollisionShape").disabled = true
+			item.set_physics_process(false)
 	elif item.ingredient_name == "pepperoni":
 		if state == States.CHEESE:
 			state = States.PEPPERONI
 			get_node("MeshInstance").mesh = load("res://assets/vox/pizza_crust_tomato_cheese_pepperoni.vox")
-			item.queue_free()
+			item.visible = false
+			item.get_node("CollisionShape").disabled = true
+			item.set_physics_process(false)
 	else:
 		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	hover_hide()
 	if shop_component.bought:
+		hover_hide()
 		projectile_component.update_projectile(self, delta)
 	else:
 		price_tag.billboard()

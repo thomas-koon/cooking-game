@@ -14,6 +14,7 @@ onready var price_tag: Spatial = $PriceTag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hover_hide()
 	ingredient_name = "tomato"
 	matching_ingredients = ["pizza"]
 	shop_component = ShopComponent.new()
@@ -35,8 +36,8 @@ func hover_hide():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	hover_hide()
 	if shop_component.bought:
+		hover_hide()
 		projectile_component.update_projectile(self, delta)
 	else:
 		price_tag.billboard()

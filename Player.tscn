@@ -42,3 +42,9 @@ cast_to = Vector3( 0, 0, -4 )
 [node name="RayCast2" type="RayCast" parent="Head/Camera"]
 enabled = true
 cast_to = Vector3( 0, -1, -200 )
+
+[node name="JumpRaycast" type="RayCast" parent="Head/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.25, 0 )
+enabled = true
+cast_to = Vector3( 0, -40, 0 )
+collide_with_areas = true

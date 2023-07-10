@@ -16,6 +16,7 @@ var cooked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hover_hide()
 	cooked = false
 	ingredient_name = "sausage"
 	matching_ingredients = ["stove", "hotdog"]
@@ -42,8 +43,8 @@ func cook():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	hover_hide()
 	if shop_component.bought:
+		hover_hide()
 		projectile_component.update_projectile(self, delta)
 	else:
 		price_tag.billboard()

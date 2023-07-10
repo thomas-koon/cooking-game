@@ -2,9 +2,10 @@ extends KinematicBody
 
 const MOUSE_SENSITIVITY = 0.04;
 const GRAVITY = 40; # downward acceleration in m/s^2
-const JUMP_IMPULSE = 20;
+const JUMP_IMPULSE = 30;
 const KB_INTERPOLATION_SPEED = 3;
 const SPEED = 50; # movement speed in m/s
+const MAX_VERTICAL_VELOCITY = 20
 var throw_strength
 var velocity = Vector3.ZERO
 var kb = Vector3.ZERO
@@ -12,9 +13,12 @@ var holding;
 var hovering
 var coins
 
+var old_looking
+
 onready var head = $Head;
 onready var raycast = $Head/Camera/RayCast1;
 onready var raycast2 = $Head/Camera/RayCast2;
+onready var jump_raycast = $Head/Camera/JumpRaycast;
 onready var camera = $Head/Camera;
 
 # i swear this was the only way. it wouldnt work with get_tree()
@@ -36,6 +40,8 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-80), deg2rad(80))
 
 func _physics_process(delta):
+	if velocity.y > MAX_VERTICAL_VELOCITY:
+		velocity.y = MAX_VERTICAL_VELOCITY
 	# player's movement (unit) vector
 	var direction = Vector3.ZERO
 	# jump
@@ -81,7 +87,23 @@ func _process(_delta):
 					coins = coins - obj.price
 					obj.shop_component.bought = true
 					ui.update_coins(coins)
-	if raycast2.is_colliding():
+	var new_looking = null
+	if raycast2.is_colliding() and raycast2.get_collider() != null:
+		if raycast2.get_collider().has_method("hover_show"):
+			new_looking = raycast2.get_collider()
+	if new_looking == old_looking:
+		pass
+	else:
+		if old_looking == null and new_looking != null:
+			new_looking.hover_show()
+		elif new_looking == null and old_looking != null:
+			old_looking.hover_hide()
+		else:
+			old_looking.hover_hide()
+			new_looking.hover_show()
+	old_looking = new_looking
+	
+	"""
 		var looking = raycast2.get_collider()
 		if looking == null:
 			pass
@@ -89,13 +111,16 @@ func _process(_delta):
 			if looking.has_method("hover_show"):
 				hovering = looking
 				looking.hover_show()
+		"""
 	if(holding != null):
 		holding.transform.origin = raycast.to_global(raycast.get_cast_to());
+		holding.get_node("CollisionShape").disabled = true
 		if Input.is_action_pressed("throw") and throw_strength < 4:
 			throw_strength += 0.02
 			raycast.rotation_degrees.x -= 0.2
 			raycast.rotation_degrees.y -= 0.2
 		if Input.is_action_just_released("throw"):
+			holding.get_node("CollisionShape").disabled = false
 			var obj = holding
 			holding = null; 
 			raycast.rotation_degrees.x = 0
@@ -109,7 +134,9 @@ func _process(_delta):
 			if raycast.is_colliding():
 				var obj = raycast.get_collider();
 				if obj.is_in_group("projectile"):
-					holding = obj;
+					if obj.shop_component.bought:
+						holding = obj;
+						obj.get_node("CollisionShape").disabled = true
 		else: # drop it
 			holding = null;
 

@@ -3,11 +3,15 @@ extends Control
 onready var coin_counter = $CoinCounter/Label
 onready var wave = $Wave
 onready var timer = $Timer
+onready var customer_counter = $CustomerCounter/Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func update_customers(customers, wave_amount):
+	customer_counter.text = str(customers, "/", wave_amount)
+	
 func update_coins(coins):
 	coin_counter.text = str(coins)
 

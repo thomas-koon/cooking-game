@@ -1,6 +1,7 @@
 extends KinematicBody
 
 export var wave : int
+export var coins : int
 
 const GRAVITY = 40;
 const ROTATION_SPEED = 8;
@@ -12,7 +13,7 @@ var dashing = false; # even if in DASHING state, this has to be true to dash
 var dash_direction;
 var justJumped = false;
 
-signal dash_hit
+var just_got_hit
 
 enum States {IDLE, LOOKING, JUMPING, DASHING}
 var _state : int = States.IDLE
@@ -24,10 +25,13 @@ onready var stateTimer: Timer = $StateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	just_got_hit = false
 	_state = States.IDLE
 	stateTimer.start()
 
 func _physics_process(delta):
+	if kb.length() == 0 and just_got_hit:
+		just_got_hit = false
 	var position = player.global_transform.origin #player's position
 	var direction = (position - global_transform.origin).normalized()
 	var distance = global_transform.origin.distance_to(position)
@@ -73,7 +77,7 @@ func _physics_process(delta):
 			if _state == States.DASHING:
 				if player.holding == obj:
 					player.holding = null
-					player.knockback(dash_direction, 2)
+					player.knockback(dash_direction, 5)
 				obj.velocity.y += 20
 		if obj.is_in_group("player"):
 			# if on top of player
@@ -84,9 +88,9 @@ func _physics_process(delta):
 					dashing = false
 					velocity.x = 0
 					velocity.z = 0
-					player.knockback(dash_direction, 2)
+					player.knockback(dash_direction, 5)
 				if _state == States.JUMPING and !is_on_floor():
-					player.knockback(direction, 2)
+					player.knockback(direction, 10)
 					
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -114,6 +118,8 @@ func dash(direction):
 	velocity.z = motion.z
 	
 func knockback(kb_dir, magnitude):
+	print("ouch")
+	just_got_hit = true
 	kb += kb_dir * magnitude
 
 func _on_StateTimer_timeout():
@@ -129,7 +135,7 @@ func _on_StateTimer_timeout():
 		if _state == States.IDLE:
 			_state = States.LOOKING
 		elif _state == States.LOOKING:
-			if distance > 40 || (abs(position.y - global_transform.origin.y) > 1 and player.is_on_floor()):
+			if distance > 40 || abs(position.y - global_transform.origin.y) > 1:
 				_state = States.JUMPING
 			else:
 				dash_direction = direction

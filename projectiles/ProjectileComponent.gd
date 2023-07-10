@@ -65,4 +65,5 @@ func hit(projectile, collision):
 			var item = collision.get_collider()
 			if projectile.matching_ingredients.has(item.ingredient_name):
 				# collided.recipe(thrown)
-				item.recipe(projectile) # each recipe component will have its own recipe() function
+				if item.shop_component.bought:
+					item.recipe(projectile) # each recipe component will have its own recipe() function

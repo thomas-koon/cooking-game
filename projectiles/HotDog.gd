@@ -18,6 +18,7 @@ var state
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hover_hide()
 	state = States.BUN
 	ingredient_name = "hotdog"
 	matching_ingredients = []
@@ -43,19 +44,25 @@ func recipe(item):
 		if item.cooked and state == States.BUN:
 			state = States.SAUSAGE
 			get_node("MeshInstance").mesh = load("res://assets/vox/hot_dog.vox")
-			item.queue_free()
+			item.visible = false
+			item.get_node("CollisionShape").disabled = true
+			item.set_physics_process(false)
+			print("helo")
 	elif item.ingredient_name == "mustard":
 		if state == States.SAUSAGE:
+			print("i am msutard")
 			state = States.MUSTARD
 			get_node("MeshInstance").mesh = load("res://assets/vox/hot_dog_mustard.vox")
-			item.queue_free()
+			item.visible = false
+			item.get_node("CollisionShape").disabled = true
+			item.set_physics_process(false)
 	else:
 		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	hover_hide()
 	if shop_component.bought:
+		hover_hide()
 		projectile_component.update_projectile(self, delta)
 	else:
 		price_tag.billboard()
