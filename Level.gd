@@ -70,9 +70,11 @@ func kill_mob(mob):
 	ui.update_coins(player.coins)
 	mob.queue_free()
 	
+func win_level():
+	get_tree().change_scene("res://interface/WinScreen.tscn")
+	
 func fail_level():
-	print("fail")
-	get_tree().quit()
+	get_tree().change_scene("res://interface/GameOverScreen.tscn")
 	
 func getCurrentCustomers():
 	var nodes = get_tree().get_nodes_in_group("customer")
@@ -92,7 +94,7 @@ func _on_WaveSeconds_timeout():
 	if waveTimeLeft == 0:
 		if getCurrentCustomers() == 0:
 			if wave >= waves.size() - 1:
-				get_tree().quit()
+				win_level()
 			else:
 				wave += 1
 				waveTimeLeft = waves[wave]

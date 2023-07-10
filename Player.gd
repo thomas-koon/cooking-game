@@ -118,13 +118,11 @@ func _process(_delta):
 		if Input.is_action_pressed("throw") and throw_strength < 4:
 			throw_strength += 0.02
 			raycast.rotation_degrees.x -= 0.2
-			raycast.rotation_degrees.y -= 0.2
 		if Input.is_action_just_released("throw"):
 			holding.get_node("CollisionShape").disabled = false
 			var obj = holding
 			holding = null; 
 			raycast.rotation_degrees.x = 0
-			raycast.rotation_degrees.y = 0
 			obj.projectile_component.throw(obj, ((raycast.to_global((raycast.cast_to)))-raycast.to_global(Vector3.ZERO)), throw_strength)
 			throw_strength = 0
 	else:

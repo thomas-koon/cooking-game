@@ -11,7 +11,7 @@
 [ext_resource path="res://projectiles/Mustard.tscn" type="PackedScene" id=9]
 [ext_resource path="res://projectiles/HotDog.tscn" type="PackedScene" id=10]
 [ext_resource path="res://projectiles/Sausage.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Spaceship.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Spaceship1.tscn" type="PackedScene" id=12]
 [ext_resource path="res://projectiles/Cheese.tscn" type="PackedScene" id=13]
 [ext_resource path="res://projectiles/Pizza.tscn" type="PackedScene" id=14]
 [ext_resource path="res://projectiles/Tomato.tscn" type="PackedScene" id=15]
@@ -59,7 +59,7 @@ albedo_color = Color( 0.364706, 0.337255, 0.337255, 1 )
 
 [node name="Main" type="Node" groups=["stage"]]
 script = ExtResource( 3 )
-waves = [ 10, 60, 45, 90 ]
+waves = [ 12, 45, 30, 45 ]
 fall_threshold = -5
 
 [node name="Interface" type="CanvasLayer" parent="."]
@@ -154,8 +154,8 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 8.22701, 34.0297 )
 wave = 1
 price = 5
 
-[node name="wave1 hotdog customer" parent="Viewport3D/Viewport" instance=ExtResource( 12 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 13.7443, -10.2063 )
+[node name="wave1 customerhotdog" parent="Viewport3D/Viewport" groups=["wave_spawn"] instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -25.1733, -1.12966, -27.9379 )
 wave = 1
 
 [node name="wave2 smiler for 5" parent="Viewport3D/Viewport" instance=ExtResource( 7 )]
@@ -183,6 +183,10 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 8.22701, 34.0297 )
 wave = 2
 price = 5
 
+[node name="wave2 customerhotdog" parent="Viewport3D/Viewport" groups=["wave_spawn"] instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 19.4029, 0.0309267, -26.3984 )
+wave = 2
+
 [node name="wave3 free pizzaoven" parent="Viewport3D/Viewport" instance=ExtResource( 17 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.60599, 10.6825, 60.0394 )
 wave = 3
@@ -192,7 +196,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69644, 9.06996, 55.0445 )
 wave = 3
 
 [node name="wave3 tomato for 5" parent="Viewport3D/Viewport" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2137, 5.44715, 62.0514 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -15.2137, 5.44715, 62.0514 )
 wave = 3
 price = 5
 
@@ -205,6 +209,26 @@ wave = 3
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2045, 8.7388, 57.1363 )
 price = 5
 wave = 3
+
+[node name="wave3 customerpizza" parent="Viewport3D/Viewport" groups=["wave_spawn"] instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.180643, 2.29887, -26.3984 )
+wave = 3
+food_type = 1
+
+[node name="wave3 smiler for 5" parent="Viewport3D/Viewport" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0189, 6.42366, 24.5345 )
+wave = 3
+coins = 5
+
+[node name="wave3 smiler1 for 5" parent="Viewport3D/Viewport" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9134, 6.42366, 24.5345 )
+wave = 3
+coins = 10
+
+[node name="wave3 smiler2 for 5" parent="Viewport3D/Viewport" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.747909, 6.42366, 24.5345 )
+wave = 3
+coins = 10
 
 [node name="MobRespawn1" type="Spatial" parent="Viewport3D/Viewport" groups=["respawn"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3874, 10.4274, 64.1882 )

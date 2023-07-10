@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://interface/WinScreen.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.172
+anchor_bottom = 1.0
+margin_right = -0.128052
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0, 0.760784, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.142
+anchor_top = 0.247
+anchor_right = 0.547
+anchor_bottom = 0.637
+margin_left = -0.400009
+margin_top = -0.200012
+margin_right = -162.4
+margin_bottom = -78.2
+rect_scale = Vector2( 1.5, 1.5 )
+text = "you win"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="StartButton" type="Button" parent="."]
+anchor_left = 0.545
+anchor_top = 0.47
+anchor_right = 0.801
+anchor_bottom = 0.503
+margin_left = -0.0800171
+margin_top = -3.05176e-05
+margin_right = -0.22406
+margin_bottom = 0.199982
+text = "play again"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

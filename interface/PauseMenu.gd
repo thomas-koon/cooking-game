@@ -20,4 +20,5 @@ func _on_ResumeBtn_pressed():
 	set_paused(false)
 
 func _on_QuitBtn_pressed():
-	get_tree().quit()
+	get_tree().reload_current_scene()
+	get_tree().change_scene("res://interface/MainMenu.tscn")
